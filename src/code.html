@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stream Festival | Psychedelic Dreamscape</title>
+<script src="../config/site-config.js"></script>
+<script>
+  // Set page configuration from config file
+  function applyConfig() {
+    if (typeof siteConfig !== 'undefined') {
+      document.title = siteConfig.title;
+      // Set hero image source
+      const heroImg = document.getElementById('hero-img');
+      if (heroImg && siteConfig.heroImage) {
+        heroImg.src = siteConfig.heroImage;
+      }
+      // Set hero title with line breaks
+      const heroTitle = document.getElementById('hero-title');
+      if (heroTitle && siteConfig.heroTitle) {
+        heroTitle.innerHTML = siteConfig.heroTitle.replace(/\n/g, '<br/>');
+      }
+      // Set hero eyebrow text
+      const heroEyebrow = document.getElementById('hero-eyebrow');
+      if (heroEyebrow && siteConfig.heroEyebrow) {
+        heroEyebrow.innerHTML = siteConfig.heroEyebrow.replace(/\n/g, '<br/>');
+      }
+      // Set floating hero badge text
+      const heroBadge = document.getElementById('hero-badge');
+      if (heroBadge && siteConfig.heroBadge) {
+        heroBadge.innerHTML = siteConfig.heroBadge.replace(/\n/g, '<br/>');
+      }
+      // Set hero cards section copy
+      const heroCardsSectionTitle = document.getElementById('hero-cards-section-title');
+      if (heroCardsSectionTitle && siteConfig.heroCardsSectionTitle) {
+        heroCardsSectionTitle.textContent = siteConfig.heroCardsSectionTitle;
+      }
+      const heroCardsSectionDescription = document.getElementById('hero-cards-section-description');
+      if (heroCardsSectionDescription && siteConfig.heroCardsSectionDescription) {
+        heroCardsSectionDescription.textContent = siteConfig.heroCardsSectionDescription;
+      }
+      // Set hero section cards
+      if (Array.isArray(siteConfig.heroCards)) {
+        siteConfig.heroCards.forEach((card, index) => {
+          const image = document.getElementById(`hero-card-image-${index}`);
+          const title = document.getElementById(`hero-card-title-${index}`);
+          const description = document.getElementById(`hero-card-description-${index}`);
+          const link = document.getElementById(`hero-card-link-${index}`);
+
+          if (image) {
+            const imagePool = Array.isArray(card.images) && card.images.length > 0
+              ? card.images
+              : (card.image ? [card.image] : []);
+            if (imagePool.length > 0) {
+              const randomImage = imagePool[Math.floor(Math.random() * imagePool.length)];
+              image.src = randomImage;
+            }
+            if (card.imageAlt) {
+              image.alt = card.imageAlt;
+            }
+          }
+          if (title && card.title) {
+            title.textContent = card.title;
+          }
+          if (description && card.description) {
+            description.textContent = card.description;
+          }
+          if (link) {
+            if (card.linkText) {
+              const textNode = Array.from(link.childNodes).find((node) => node.nodeType === Node.TEXT_NODE);
+              if (textNode) {
+                textNode.textContent = `${card.linkText} `;
+              } else {
+                link.insertBefore(document.createTextNode(`${card.linkText} `), link.firstChild);
+              }
+            }
+            if (card.href) {
+              link.href = card.href;
+            }
+          }
+        });
+      }
+    }
+  }
+
+  // Apply config when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyConfig);
+  } else {
+    applyConfig();
+  }
+</script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "dream-purple": "#d4b3ff",
+              "dream-blue": "#a6c8ff",
+              "dream-pink": "#ffb6c1",
+              "mystic-indigo": "#2b1b54",
+              "ethereal-white": "rgba(255, 255, 255, 0.7)",
+              "primary": "#8a2be2",
+              "secondary": "#ff69b4",
+              "tertiary": "#40e0d0",
+            },
+            fontFamily: {
+              "headline": ["Epilogue"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {
+              "DEFAULT": "3rem",
+              "lg": "5rem",
+              "xl": "7rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply overflow-x-hidden;
+                background: linear-gradient(120deg, #ffb6c1 0%, #a6c8ff 40%, #d4b3ff 80%, #e0c3fc 100%);
+                background-attachment: fixed;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .organic-shape {
+            border-radius: 50% 50% 40% 60% / 60% 40% 50% 50%;
+        }
+        .organic-shape-alt {
+            border-radius: 60% 40% 50% 50% / 40% 60% 50% 50%;
+        }
+        .glass-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.35);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+        .dream-gradient-text {
+            background: linear-gradient(to right, #8a2be2, #ff69b4, #40e0d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        section {
+            position: relative;
+            margin-top: -8rem;
+            padding-top: 12rem;
+            padding-bottom: 12rem;
+        }
+        .floating {
+            animation: floating 8s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translate(0, 0px) rotate(0deg); }
+            50% { transform: translate(0, 30px) rotate(2deg); }
+            100% { transform: translate(0, 0px) rotate(0deg); }
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .language-menu {
+            transform: translateY(0.75rem) scale(0.96);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .language-menu[data-open="true"] {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="font-body text-mystic-indigo selection:bg-dream-blue selection:text-white">
+<header class="fixed top-0 w-full z-[100] px-4 py-6">
+<nav class="glass-blur rounded-full px-6 py-4 flex justify-between items-center max-w-7xl mx-auto shadow-2xl">
+<div class="flex items-center gap-2">
+<img alt="Stream Festival Logo" class="h-10 lg:h-12 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]" src="../res/stream_logo.png"/>
+</div>
+<div class="hidden lg:flex gap-12 items-center" id="nav-items">
+<!-- Navigation items will be loaded from config.json -->
+</div>
+<div class="relative hidden md:block" id="language-picker">
+<button aria-expanded="false" aria-haspopup="true" class="flex w-[11rem] items-center justify-between gap-3 text-mystic-indigo hover:text-primary font-headline font-bold tracking-tight transition-colors glass-blur px-5 py-3 rounded-full border border-white/40 shadow-lg" id="language-toggle" type="button">
+<span class="truncate" id="language-current">English</span>
+<span class="material-symbols-outlined text-lg" id="language-icon">expand_more</span>
+</button>
+<div class="language-menu absolute right-0 top-full mt-4 min-w-[12rem] glass-blur rounded-[2rem] border border-white/50 shadow-2xl p-2 transition-all duration-200" data-open="false" id="language-menu"></div>
+</div>
+</nav>
+</header>
+<main class="relative">
+<section class="min-h-screen flex items-center px-4 lg:px-12 overflow-visible pt-60 lg:pt-80">
+<div class="absolute top-0 right-0 -z-10 w-full h-full bg-gradient-to-br from-dream-purple/40 to-dream-blue/30 blur-[150px] organic-shape"></div>
+<div class="grid lg:grid-cols-2 gap-20 items-center w-full max-w-7xl mx-auto">
+<div class="order-2 lg:order-1 relative z-10 text-center lg:text-left">
+<span id="hero-eyebrow" class="inline-block px-8 py-3 glass-blur rounded-full font-black text-xs lg:text-sm uppercase tracking-[0.5em] leading-relaxed mb-4 text-primary border-white/60">A Celestial Convergence</span>
+<h1 id="hero-title" class="font-headline text-[2.5rem] lg:text-[6rem] font-black leading-[1.1] tracking-tighter mb-12 dream-gradient-text drop-shadow-sm">Unfold<br/>Your<br/>Journey</h1>
+<div class="hidden flex-col sm:flex-row gap-6 lg:gap-8 justify-center lg:justify-start">
+<button class="bg-mystic-indigo text-white px-10 lg:px-12 py-5 lg:py-6 rounded-full font-black text-lg lg:text-xl hover:bg-gradient-to-r hover:from-primary hover:to-tertiary transition-all shadow-[0_20px_40px_rgba(43,27,84,0.4)] hover:-translate-y-2">
+                            Step Through
+                        </button>
+<button class="glass-blur border-2 border-white text-mystic-indigo px-10 lg:px-12 py-5 lg:py-6 rounded-full font-black text-lg lg:text-xl hover:bg-white/60 transition-all shadow-xl">
+                            Listen to the Wind
+                        </button>
+</div>
+</div>
+<div class="order-1 lg:order-2 relative px-8 lg:px-0 lg:-ml-40">
+<div class="absolute -inset-10 bg-gradient-to-tr from-secondary/30 to-tertiary/30 rounded-full blur-3xl animate-pulse"></div>
+<div class="organic-shape overflow-hidden shadow-[0_30px_80px_rgba(255,105,180,0.4)] floating border-[8px] lg:border-[12px] border-white/50 bg-white/20 backdrop-blur-md w-[400px] h-[600px] lg:w-[800px] lg:h-[500px]">
+<img id="hero-img" class="w-full h-full object-cover organic-shape-alt" data-alt="vibrant music festival crowd at night with colorful stage lights beams of magenta and gold reflecting on excited faces" src=""/>
+</div>
+<div class="absolute -bottom-8 -left-4 lg:-bottom-16 lg:-left-16 w-32 h-32 lg:w-56 lg:h-56 bg-gradient-to-br from-tertiary to-dream-blue rounded-full flex items-center justify-center text-center p-4 lg:p-6 glass-blur organic-shape shadow-2xl border-4 border-white/80 z-20 floating" style="animation-delay: 1s;">
+<span id="hero-badge" class="font-headline font-black text-white text-xs lg:text-xl uppercase leading-snug tracking-widest drop-shadow-md">Breathe<br/>In<br/>Magic</span>
+</div>
+</div>
+</div>
+</section>
+<section class="py-40 px-4 bg-gradient-to-b from-white/20 to-white/40 glass-blur mx-0 lg:mx-8 mt-20 border-y-4 border-white/60">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-32 relative">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 lg:w-96 h-64 lg:h-96 bg-primary/20 blur-[100px] rounded-full"></div>
+<h2 id="hero-cards-section-title" class="font-headline text-5xl lg:text-7xl font-black dream-gradient-text mb-8 relative z-10">Ethereal Havens</h2>
+<p id="hero-cards-section-description" class="text-mystic-indigo text-lg lg:text-2xl max-w-3xl mx-auto font-medium relative z-10">Lose yourself in floating sanctuaries of imagination, where the air itself shimmers with creative energy.</p>
+</div>
+<div class="grid lg:grid-cols-3 gap-12 lg:gap-20">
+<div class="group relative">
+<div class="absolute -inset-6 bg-gradient-to-b from-primary/20 to-transparent rounded-[5rem] blur-xl group-hover:bg-primary/30 transition-all duration-700"></div>
+<div class="relative glass-blur p-8 lg:p-10 rounded-[4rem] lg:rounded-[5rem] hover:-translate-y-6 transition-transform duration-700 border-2 border-white/60 shadow-2xl">
+<div class="organic-shape-alt overflow-hidden mb-10 h-64 lg:h-72 border-4 border-white shadow-inner">
+<img id="hero-card-image-0" alt="overhead view of messy art workshop table with paint brushes colorful canvases and creative tools in soft natural light" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxtdKFzf9Q3S62caF6gGBbVMgC5sXrc40AiJAY0WFtosuGse3SAb0uC1gyCMH9XcjVm_efgLXKelr93Y9A6guMX3C0LdYfxr38cAUUh_jYhjjhUcyd9s3YbInz7gaKrCLb8vXhL-yxkXJiwQmNhmigeKjjtZiQxANSDg2t8IbCrZmAnMqNJa9lySViLWCMYYfDoMjAGygCZJ9WwaMUgV1u7Hk9eeHqDfvGEo5yrr9lqIn8LRkL91jc46oFqaqvwEvu7bzo6gisH6O3"/>
+</div>
+<h3 id="hero-card-title-0" class="font-headline text-3xl lg:text-4xl font-black text-primary mb-6">Creation Nebulas</h3>
+<p id="hero-card-description-0" class="text-mystic-indigo/90 text-base lg:text-lg leading-relaxed mb-8 font-medium">Mold the fabric of reality with your own hands under the guidance of astral artisans.</p>
+<a id="hero-card-link-0" class="inline-flex items-center gap-3 font-black text-primary group-hover:pl-4 transition-all uppercase text-xs lg:text-sm tracking-[0.2em] bg-white/40 px-6 py-3 rounded-full" href="#">Explore Inner Space <span class="material-symbols-outlined">arrow_forward</span></a>
+</div>
+</div>
+<div class="group relative lg:mt-32">
+<div class="absolute -inset-6 bg-gradient-to-b from-secondary/20 to-transparent rounded-[5rem] blur-xl group-hover:bg-secondary/30 transition-all duration-700"></div>
+<div class="relative glass-blur p-8 lg:p-10 rounded-[4rem] lg:rounded-[5rem] hover:-translate-y-6 transition-transform duration-700 border-2 border-white/60 shadow-2xl">
+<div class="organic-shape overflow-hidden mb-10 h-64 lg:h-72 border-4 border-white shadow-inner">
+<img id="hero-card-image-1" alt="colorful outdoor craft market stall with artisanal pottery hand-woven textiles and hanging plants in golden afternoon sunlight" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl02O3VQG_GBjMG7Qvk9pnhA7LtIm1gomwPn1hkfNfkMuuxHkZnzfPfBnzH1r157fN8KMkX_epcQvh_D-a4C1vAS0can1DUOnXuBvzjq0z31TSmL0we8ou3jOA8GSfufFbnsEdQkzraPB4GWqMENxoTC6aWJ00PfK1rrscPkJToHjdFAMBO4fleB0MWX9D5XHu-gSGGsCzjnnnqaRLONv1NYu0lsdWqQHOngWG2sRI8gUYGoRVygjOnmBdIvcfWlg13JxDamp5cFhK"/>
+</div>
+<h3 id="hero-card-title-1" class="font-headline text-3xl lg:text-4xl font-black text-secondary mb-6">Wandering Markets</h3>
+<p id="hero-card-description-1" class="text-mystic-indigo/90 text-base lg:text-lg leading-relaxed mb-8 font-medium">Gather enchanted trinkets and vibrant textiles spun from starlight and cosmic dust.</p>
+<a id="hero-card-link-1" class="inline-flex items-center gap-3 font-black text-secondary group-hover:pl-4 transition-all uppercase text-xs lg:text-sm tracking-[0.2em] bg-white/40 px-6 py-3 rounded-full" href="#">Find Your Charm <span class="material-symbols-outlined">arrow_forward</span></a>
+</div>
+</div>
+<div class="group relative">
+<div class="absolute -inset-6 bg-gradient-to-b from-tertiary/20 to-transparent rounded-[5rem] blur-xl group-hover:bg-tertiary/30 transition-all duration-700"></div>
+<div class="relative glass-blur p-8 lg:p-10 rounded-[4rem] lg:rounded-[5rem] hover:-translate-y-6 transition-transform duration-700 border-2 border-white/60 shadow-2xl">
+<div class="organic-shape-alt overflow-hidden mb-10 h-64 lg:h-72 border-4 border-white shadow-inner">
+<img id="hero-card-image-2" alt="stacks of vintage books and artistic journals on a rustic wooden desk with warm cozy lighting and autumn leaves" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBymkG4JpcOTM3YTDjtuvvN8nz27JOnGr8NMlEXTmJmuYBSzBeoMzHZ1q-UEqo76rGFZrMQ9YfWsnMCIfX2xE5PwBckX1NYrCoqeNA6u1bUbMZpSbD7PnXrQ-FDIdMWAtCz_6wnqh5u1u7A7HyAlUZ1HRFgpX_6xFrizPP0JAin-jD0EyElivZAh4eQrRPH8S1naZqJNg0ChwAH9AgHcDxaYjDNt5fA6Wr-5R8yBN_3qUw8XDlrnp-wRMnGOG6qkMXJ5nE7F2zcrTa5"/>
+</div>
+<h3 id="hero-card-title-2" class="font-headline text-3xl lg:text-4xl font-black text-tertiary mb-6">Whispering Tomes</h3>
+<p id="hero-card-description-2" class="text-mystic-indigo/90 text-base lg:text-lg leading-relaxed mb-8 font-medium">Decipher ancient poetry and forgotten lore in luminous pages that glow in the dusk.</p>
+<a id="hero-card-link-2" class="inline-flex items-center gap-3 font-black text-tertiary group-hover:pl-4 transition-all uppercase text-xs lg:text-sm tracking-[0.2em] bg-white/40 px-6 py-3 rounded-full" href="#">Seek Knowledge <span class="material-symbols-outlined">arrow_forward</span></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-40 overflow-visible mt-20">
+<div class="max-w-[90rem] mx-auto px-4">
+<div class="relative flex flex-col lg:flex-row items-center gap-20">
+<div class="w-full lg:w-1/2 relative z-20 order-2 lg:order-1 lg:pl-12">
+<div class="glass-blur p-10 lg:p-16 rounded-[4rem] lg:rounded-[6rem] shadow-[0_30px_60px_rgba(0,0,0,0.1)] border-4 border-white/70 relative">
+<div class="absolute -top-12 -left-12 w-32 h-32 bg-secondary rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+<div class="absolute -bottom-12 -right-12 w-32 h-32 bg-tertiary rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style="animation-delay: 2s;"></div>
+<h2 class="font-headline text-5xl lg:text-6xl font-black dream-gradient-text mb-10 tracking-tight leading-none text-center lg:text-left">Harmonic<br/>Frequencies</h2>
+<p class="text-xl lg:text-2xl text-mystic-indigo mb-12 leading-relaxed font-medium text-center lg:text-left">
+                                Bathe in cascades of living sound and refracted light. Every note is a color, every beam a melody that resonates through your soul.
+                            </p>
+<div class="space-y-8 lg:space-y-10">
+<div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-center lg:items-center group bg-white/30 p-6 rounded-[2.5rem] lg:rounded-[3rem] hover:bg-white/50 transition-colors border border-white/40">
+<div class="w-16 h-16 lg:w-20 lg:h-20 organic-shape bg-gradient-to-br from-primary to-secondary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-lg text-white">
+<span class="material-symbols-outlined text-3xl lg:text-4xl">blur_on</span>
+</div>
+<div class="text-center lg:text-left">
+<h4 class="font-black text-xl lg:text-2xl text-mystic-indigo mb-1 lg:mb-2">Prismatic Echoes</h4>
+<p class="text-mystic-indigo/80 text-base lg:text-lg">Visual landscapes that morph and breathe in sync with bass lines.</p>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-center lg:items-center group bg-white/30 p-6 rounded-[2.5rem] lg:rounded-[3rem] hover:bg-white/50 transition-colors border border-white/40">
+<div class="w-16 h-16 lg:w-20 lg:h-20 organic-shape-alt bg-gradient-to-br from-tertiary to-dream-blue flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-lg text-white">
+<span class="material-symbols-outlined text-3xl lg:text-4xl">graphic_eq</span>
+</div>
+<div class="text-center lg:text-left">
+<h4 class="font-black text-xl lg:text-2xl text-mystic-indigo mb-1 lg:mb-2">Soul Resonance</h4>
+<p class="text-mystic-indigo/80 text-base lg:text-lg">Acoustic waves designed to align your chakras and elevate your spirit.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full lg:w-1/2 relative order-1 lg:order-2 px-6 lg:px-0">
+<div class="organic-shape overflow-hidden shadow-[0_40px_100px_rgba(64,224,208,0.3)] border-[12px] lg:border-[16px] border-white/60 bg-white/30 backdrop-blur-sm p-3 lg:p-4 floating">
+<img class="w-full aspect-[4/5] lg:aspect-[3/4] object-cover organic-shape-alt" data-alt="large outdoor music festival main stage at sunset with dramatic orange and purple sky and silhouetted crowd" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJzq_lIZNWniX4sJS_aSl2TDZi-Uf6YZhn_IB6XL84GdAn3Bn72tUbkTSyt4pwvEtH1O5oJOLV1VrKT0IYoLzYolO1xyqFe-p5muK2HVIlWqinhqEVosOSk9M-BP4jITQKpwmH2hOWWN1pKRfktpy7Xtm94lN1oF5QXqr3tz1d2i9bVb8vc6yy12VdXg0HbuntHkU55HMSmkCnIOdJ7iICR1ezY7WAF0k0tO9kJsuMvlYVTlFElx83cCJ3Vfm9yLuo1iiprtHDfZ2A"/>
+</div>
+<div class="absolute top-10 lg:top-20 -left-8 lg:-left-16 glass-blur p-6 lg:p-8 rounded-[3rem] lg:rounded-[4rem] shadow-2xl max-w-[12rem] lg:max-w-[16rem] border-2 border-white/80 z-30 floating" style="animation-delay: 1.5s;">
+<span class="material-symbols-outlined text-tertiary text-4xl lg:text-6xl mb-4 block">all_inclusive</span>
+<p class="font-headline text-base lg:text-xl font-black text-mystic-indigo leading-tight">"Let the vibrations dissolve your boundaries."</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-40 px-0 mt-20">
+<div class="max-w-[100rem] mx-auto">
+<div class="px-8 lg:px-24 mb-20 flex flex-col md:flex-row justify-between items-center lg:items-end gap-10 text-center lg:text-left">
+<div class="glass-blur p-10 lg:p-12 rounded-[3.5rem] lg:rounded-[4rem] inline-block border-2 border-white/50">
+<p class="text-secondary font-black mb-4 uppercase tracking-[0.5em] text-xs lg:text-sm">Drift Through</p>
+<h2 class="font-headline text-[3rem] lg:text-[5rem] font-black text-mystic-indigo tracking-tight leading-none">Mirage Dimensions</h2>
+</div>
+<div class="flex gap-6 pb-6">
+<button class="w-16 h-16 lg:w-20 lg:h-20 rounded-full glass-blur border-2 border-white flex items-center justify-center text-mystic-indigo hover:bg-white hover:scale-110 transition-all shadow-xl">
+<span class="material-symbols-outlined text-2xl lg:text-3xl">arrow_back</span>
+</button>
+<button class="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-gradient-to-r from-primary to-secondary text-white flex items-center justify-center hover:scale-110 transition-all shadow-[0_10px_30px_rgba(138,43,226,0.4)]">
+<span class="material-symbols-outlined text-2xl lg:text-3xl">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="flex gap-10 lg:gap-16 overflow-x-auto pb-20 px-8 lg:px-24 no-scrollbar snap-x items-center">
+<div class="min-w-[320px] lg:min-w-[500px] snap-center group relative mt-10">
+<div class="absolute -inset-4 bg-primary/20 rounded-[4rem] blur-2xl group-hover:bg-primary/40 transition-all duration-500"></div>
+<div class="organic-shape overflow-hidden mb-10 shadow-2xl border-6 lg:border-8 border-white/60 relative z-10 p-2 bg-white/20">
+<img class="w-full h-[300px] lg:h-[400px] object-cover organic-shape-alt group-hover:scale-125 group-hover:rotate-3 transition-all duration-1000" data-alt="futuristic music stage with triangular neon light structures and glowing magenta accents in a dark indoor arena" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx451ZiwH9aMmcbfZy63iECcCXWWlw0dnb3P-MARyTEqflaoTItuAnzPflnlOG5p_ipRR44m97fuTF3HkFprkhGSItxKJkAHhYbTvGooZUaUTWrRiXw-gErCkq5LAFznIq33gAz_aNuzJz73AIg0Q_Ffhe0lBPWIqn4bN0RMo2YCEq_Veq9BzO22s6jAUhXYVSXQPGNIwWPnbM5er-NpoC-TvQ2SNr846mTOqILylBSoW9K6GYPAOxFdNZDeYZJrtbGqueVfBrhWTG"/>
+</div>
+<div class="text-center glass-blur p-6 lg:p-8 rounded-[2.5rem] lg:rounded-[3rem] border border-white/50 -mt-20 relative z-20 mx-6 lg:mx-8">
+<h3 class="font-headline text-2xl lg:text-4xl font-black text-primary mb-2 lg:mb-3">Neon Abyss</h3>
+<p class="text-mystic-indigo text-base lg:text-lg font-medium">Swim in oceans of synthetic light.</p>
+</div>
+</div>
+<div class="min-w-[350px] lg:min-w-[600px] snap-center group relative -mt-10">
+<div class="absolute -inset-4 bg-secondary/20 rounded-[4rem] blur-2xl group-hover:bg-secondary/40 transition-all duration-500"></div>
+<div class="organic-shape-alt overflow-hidden mb-10 shadow-2xl border-6 lg:border-8 border-white/60 relative z-10 p-2 bg-white/20">
+<img class="w-full h-[400px] lg:h-[500px] object-cover organic-shape group-hover:scale-125 group-hover:-rotate-3 transition-all duration-1000" data-alt="intimate outdoor stage surrounded by glowing neon trees and fairy lights in a lush garden setting at twilight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCit7Ifb3dBnz7Hl_FhxWg42HnAI28Gwzet1wynP0vttqicwCs974pV-5qxpGNUCHT-O1EBy-r-OdGBo3mpQPalLTztCEQ9L1vxxOAEq9Td9O5xLeQA7pWdoVBSYuXBO5htQD7SoigMB4TJliONvg4s-fPdaQ9MhWYxKeiZy3L-1UouKd3aRlR9vsi3wxEFap0qxl2zysQtrrapJSvJ3Iji9xRnimJp7ls-IXrAWUYNwbIGgmiMu44ouQ68d9qxLMUOLnWGg6haEs3G"/>
+</div>
+<div class="text-center glass-blur p-8 rounded-[2.5rem] lg:rounded-[3rem] border border-white/50 -mt-24 relative z-20 mx-8 lg:mx-12 bg-white/50">
+<h3 class="font-headline text-3xl lg:text-5xl font-black text-secondary mb-2 lg:mb-3 drop-shadow-sm">Flora Lumina</h3>
+<p class="text-mystic-indigo text-lg lg:text-xl font-bold">Where nature hums electric tunes.</p>
+</div>
+</div>
+<div class="min-w-[320px] lg:min-w-[500px] snap-center group relative mt-10">
+<div class="absolute -inset-4 bg-tertiary/20 rounded-[4rem] blur-2xl group-hover:bg-tertiary/40 transition-all duration-500"></div>
+<div class="organic-shape overflow-hidden mb-10 shadow-2xl border-6 lg:border-8 border-white/60 relative z-10 p-2 bg-white/20">
+<img class="w-full h-[300px] lg:h-[400px] object-cover organic-shape-alt group-hover:scale-125 group-hover:rotate-3 transition-all duration-1000" data-alt="modern indoor music hall with sleek architectural lines and vibrant blue and purple stage lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_8YOTqUC0Ow-2QGXywUQLQMS5FgZdVla9-trGN6mGs7QzyxpyPTmBBRnWsWeYHO22BeB-S-kXxrwudiDM9XMw4VeiZrcr4jCiuzpBT1YEu-ps9usHMfA-FQPNxTzVPgtGKfTufIbgB3is1Qp7CivPo1abUH1Tfgb_3u3SKTpmdTvMmWMzEMNCio1YhxiUC8skgr4D4r5BYNzfO8KOFeWn7M65f5Vqo8X0MzCe0nqV8ihjb8vQXi9gM5QIIgnJGjPJ30QQ-nnn3Aa5"/>
+</div>
+<div class="text-center glass-blur p-6 lg:p-8 rounded-[2.5rem] lg:rounded-[3rem] border border-white/50 -mt-20 relative z-20 mx-6 lg:mx-8">
+<h3 class="font-headline text-2xl lg:text-4xl font-black text-tertiary mb-2 lg:mb-3">Crystal Vault</h3>
+<p class="text-mystic-indigo text-base lg:text-lg font-medium">Shatter your perceptions in glass reflections.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Temporal Flow Section (formerly Celestial Alignments) -->
+<section class="py-40 px-4 mt-20 relative overflow-hidden">
+<div class="max-w-4xl mx-auto relative z-10">
+<div class="text-center mb-24">
+<h2 class="font-headline text-5xl lg:text-8xl font-black dream-gradient-text mb-6 leading-none drop-shadow-xl">Temporal Flow</h2>
+<div class="h-1.5 w-40 mx-auto bg-gradient-to-r from-primary via-secondary to-tertiary rounded-full blur-[1px]"></div>
+<p class="text-mystic-indigo text-sm lg:text-base tracking-[0.4em] uppercase font-black mt-8 bg-white/40 inline-block px-8 py-2 rounded-full border border-white/60">Chronicles of Synchronicity</p>
+</div>
+<div class="relative space-y-24">
+<!-- Timeline Vertical Line -->
+<div class="absolute left-1/2 top-4 bottom-4 w-1 bg-gradient-to-b from-primary/40 via-secondary/40 to-tertiary/40 -translate-x-1/2 rounded-full hidden md:block"></div>
+<!-- Ascension I -->
+<div class="relative">
+<div class="flex flex-col items-center mb-12">
+<h3 class="font-headline text-4xl lg:text-5xl font-black text-white bg-mystic-indigo px-10 py-4 rounded-full shadow-[0_10px_40px_rgba(43,27,84,0.4)] border-4 border-primary/30 relative z-20 mb-4">Ascension I</h3>
+<div class="w-8 h-8 rounded-full bg-primary shadow-[0_0_20px_#8a2be2] animate-pulse z-30 hidden md:block"></div>
+</div>
+<div class="grid gap-12 relative">
+<!-- Event Card 1 -->
+<div class="relative flex flex-col items-center">
+<div class="glass-blur p-8 lg:p-12 rounded-[4rem] border-4 border-white shadow-[0_30px_60px_rgba(0,0,0,0.15)] w-full max-w-2xl transform hover:scale-[1.02] transition-all hover:bg-white/50 group">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+<div class="bg-gradient-to-br from-primary to-mystic-indigo text-white px-8 py-3 rounded-full font-black text-2xl shadow-lg border-2 border-white/20">
+                                            20:00
+                                        </div>
+<div class="text-center md:text-right">
+<span class="text-secondary font-black uppercase tracking-widest text-xs block mb-1">Ethereal Passage</span>
+<span class="text-mystic-indigo/60 font-bold text-sm">Zone: Flora Lumina</span>
+</div>
+</div>
+<h4 class="font-headline text-3xl lg:text-5xl font-black text-mystic-indigo mb-4 text-center group-hover:text-primary transition-colors">Forest Whispers</h4>
+<p class="text-mystic-indigo/80 text-lg lg:text-xl font-medium text-center leading-relaxed">
+                                        An acoustic immersion amidst the luminescent trees, where the leaves sing and the wind tells ancient tales.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Ascension II -->
+<div class="relative">
+<div class="flex flex-col items-center mb-12">
+<h3 class="font-headline text-4xl lg:text-5xl font-black text-white bg-mystic-indigo px-10 py-4 rounded-full shadow-[0_10px_40px_rgba(43,27,84,0.4)] border-4 border-secondary/30 relative z-20 mb-4">Ascension II</h3>
+<div class="w-8 h-8 rounded-full bg-secondary shadow-[0_0_20px_#ff69b4] animate-pulse z-30 hidden md:block"></div>
+</div>
+<div class="grid gap-12 relative">
+<!-- Event Card 2 -->
+<div class="relative flex flex-col items-center">
+<div class="bg-gradient-to-br from-white/60 to-white/30 backdrop-blur-3xl p-8 lg:p-12 rounded-[4rem] border-4 border-white shadow-[0_40px_80px_rgba(138,43,226,0.2)] w-full max-w-2xl transform hover:scale-[1.02] transition-all group">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+<div class="bg-gradient-to-r from-secondary to-primary text-white px-8 py-3 rounded-full font-black text-2xl shadow-lg border-2 border-white/30">
+                                            23:30
+                                        </div>
+<div class="text-center md:text-right">
+<span class="text-primary font-black uppercase tracking-widest text-xs block mb-1">Peak Frequency</span>
+<span class="text-mystic-indigo/60 font-bold text-sm">Zone: Neon Abyss</span>
+</div>
+</div>
+<h4 class="font-headline text-3xl lg:text-5xl font-black text-mystic-indigo mb-4 text-center group-hover:text-secondary transition-colors leading-tight">The Liquid Voltage Ritual</h4>
+<p class="text-mystic-indigo/80 text-lg lg:text-xl font-medium text-center leading-relaxed">
+                                        A high-energy surge of synthetic frequencies and prismatic visuals designed to unify the collective consciousness.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Elements for the section -->
+<div class="absolute -top-40 -right-20 w-80 h-80 bg-secondary/20 blur-[100px] rounded-full -z-10"></div>
+<div class="absolute -bottom-40 -left-20 w-96 h-96 bg-primary/20 blur-[120px] rounded-full -z-10"></div>
+</div>
+</section>
+<section class="px-4 lg:px-12 mb-[-150px] relative z-50 mt-32">
+<div class="max-w-7xl mx-auto organic-shape bg-gradient-to-br from-mystic-indigo to-primary p-12 lg:p-32 flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-20 shadow-[0_60px_120px_rgba(43,27,84,0.6)] border-8 border-white/20 relative overflow-hidden">
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-50"></div>
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/40 blur-[120px] rounded-full mix-blend-screen"></div>
+<div class="absolute -bottom-40 -left-20 w-[400px] h-[400px] bg-tertiary/30 blur-[100px] rounded-full mix-blend-screen"></div>
+<div class="max-w-xl relative z-10 text-center lg:text-left">
+<h2 class="font-headline text-[3.5rem] lg:text-[5.5rem] font-black text-white mb-8 leading-[0.9]">Merge Minds</h2>
+<p class="text-dream-blue text-xl lg:text-2xl font-medium leading-relaxed">Catch whispers of secret dimensions, spontaneous gathering coordinates, and keys to hidden realms.</p>
+</div>
+<div class="w-full max-w-xl flex flex-col gap-6 lg:gap-8 relative z-10">
+<input class="bg-white/10 backdrop-blur-2xl border-4 border-white/30 rounded-full px-8 lg:px-12 py-6 lg:py-8 focus:ring-4 focus:ring-secondary/50 focus:border-secondary text-white placeholder-white/50 shadow-inner text-xl lg:text-2xl font-bold outline-none transition-all text-center lg:text-left" placeholder="Project your essence..." type="email"/>
+<button class="bg-gradient-to-r from-secondary to-tertiary hover:from-white hover:to-white hover:text-mystic-indigo text-white px-8 lg:px-12 py-6 lg:py-8 rounded-full font-black text-xl lg:text-2xl tracking-[0.3em] uppercase transition-all shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95 border-2 border-transparent hover:border-white">Manifest Now</button>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-gradient-to-b from-mystic-indigo via-[#1a103c] to-black px-4 pb-16 pt-24 text-white rounded-t-[3rem] lg:rounded-t-[6rem] relative overflow-hidden border-t-[12px] border-primary/40">
+<div class="absolute inset-0 overflow-hidden z-0">
+<div class="absolute left-1/4 top-12 h-2 w-2 rounded-full bg-white blur-sm"></div>
+<div class="absolute right-1/3 top-24 h-3 w-3 rounded-full bg-dream-pink blur-md"></div>
+<div class="absolute bottom-16 left-1/2 h-4 w-4 rounded-full bg-tertiary blur-lg"></div>
+</div>
+<div class="relative z-10 mx-auto max-w-7xl text-center">
+<p class="bg-gradient-to-r from-dream-purple via-secondary to-tertiary bg-clip-text font-headline text-4xl font-black text-transparent lg:text-6xl">Festival STREAM</p>
+<p class="mx-auto mt-6 max-w-2xl text-lg font-medium text-white/70">A bright overview of workshops, market moments, reading spaces, and interactive discoveries.</p>
+<div class="hidden flex justify-center gap-6 lg:gap-10 mb-20">
+<a class="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white/5 backdrop-blur-md border-2 border-white/20 flex items-center justify-center hover:bg-gradient-to-br hover:from-secondary hover:to-primary transition-all hover:scale-125 shadow-2xl group" href="#">
+<svg class="w-8 h-8 lg:w-10 lg:h-10 fill-white group-hover:scale-110 transition-transform" viewbox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+</a>
+<a class="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white/5 backdrop-blur-md border-2 border-white/20 flex items-center justify-center hover:bg-gradient-to-br hover:from-tertiary hover:to-secondary transition-all hover:scale-125 shadow-2xl group" href="#">
+<svg class="w-8 h-8 lg:w-10 lg:h-10 fill-white group-hover:scale-110 transition-transform" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+</div>
+<div class="hidden pt-10 border-t-2 border-white/10 w-full text-center">
+<p class="text-[10px] lg:text-sm text-white/40 tracking-[0.3em] lg:tracking-[0.5em] font-black uppercase">© 2026 THE INFINITE LOOP. FADE INTO THE VOID.</p>
+</div>
+</div>
+</footer>
+<script src="../config/nav-config.js"></script>
+<script>
+// Color mapping for nav items
+const colorMap = {
+  'primary': '#8a2be2',
+  'secondary': '#ff69b4',
+  'tertiary': '#40e0d0'
+};
+
+// Load navigation items from navigationConfig
+function loadNavigation() {
+  const navContainer = document.getElementById('nav-items');
+  if (!navContainer) {
+    console.error('Navigation container not found');
+    return;
+  }
+  
+  navContainer.innerHTML = ''; // Clear existing content
+  navigationConfig.navigation.forEach(item => {
+    const link = document.createElement('a');
+    link.href = item.href;
+    link.className = 'font-headline font-bold transition-colors text-lg tracking-widest';
+    link.textContent = item.label;
+    link.style.color = '#2b1b54';
+    
+    // Add hover effect with inline styles
+    link.addEventListener('mouseenter', () => {
+      link.style.color = colorMap[item.color] || '#2b1b54';
+    });
+    link.addEventListener('mouseleave', () => {
+      link.style.color = '#2b1b54';
+    });
+    
+    navContainer.appendChild(link);
+  });
+}
+
+// Load navigation when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', loadNavigation);
+} else {
+  loadNavigation();
+}
+
+function initLanguageSelector() {
+  const picker = document.getElementById('language-picker');
+  const toggle = document.getElementById('language-toggle');
+  const menu = document.getElementById('language-menu');
+  const current = document.getElementById('language-current');
+  const icon = document.getElementById('language-icon');
+
+  if (!picker || !toggle || !menu || !current || !icon) {
+    return;
+  }
+
+  const configuredLanguages = Array.isArray(navigationConfig?.languages) && navigationConfig.languages.length > 0
+    ? navigationConfig.languages
+    : [
+        { code: 'en', label: 'English' }
+      ];
+
+  menu.innerHTML = '';
+  configuredLanguages.forEach((language) => {
+    const option = document.createElement('button');
+    option.type = 'button';
+    option.className = 'language-option w-full text-left px-4 py-3 rounded-[1.4rem] font-body font-semibold text-mystic-indigo hover:bg-white/50 transition-colors';
+    option.dataset.lang = language.code;
+    option.dataset.label = language.label;
+    option.textContent = language.label;
+    menu.appendChild(option);
+  });
+
+  const options = Array.from(menu.querySelectorAll('.language-option'));
+  const savedLanguage = localStorage.getItem('selectedLanguage') || document.documentElement.lang || 'en';
+
+  function setMenuState(isOpen) {
+    menu.dataset.open = isOpen ? 'true' : 'false';
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    icon.textContent = isOpen ? 'expand_less' : 'expand_more';
+  }
+
+  function setLanguage(languageCode) {
+    const match = options.find((option) => option.dataset.lang === languageCode) || options[0];
+    current.textContent = match.dataset.label;
+    document.documentElement.lang = match.dataset.lang;
+    localStorage.setItem('selectedLanguage', match.dataset.lang);
+
+    options.forEach((option) => {
+      const isActive = option === match;
+      option.classList.toggle('bg-white/60', isActive);
+      option.classList.toggle('text-primary', isActive);
+    });
+  }
+
+  setLanguage(savedLanguage);
+  setMenuState(false);
+
+  toggle.addEventListener('click', () => {
+    setMenuState(menu.dataset.open !== 'true');
+  });
+
+  options.forEach((option) => {
+    option.addEventListener('click', () => {
+      setLanguage(option.dataset.lang);
+      setMenuState(false);
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!picker.contains(event.target)) {
+      setMenuState(false);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setMenuState(false);
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLanguageSelector);
+} else {
+  initLanguageSelector();
+}
+</script>
+</body></html>

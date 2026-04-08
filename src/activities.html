@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Festival STREAM Activities</title>
+<script src="../config/portfolio-config.js"></script>
+<script src="../config/nav-config.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "dream-purple": "#d4b3ff",
+          "dream-blue": "#a6c8ff",
+          "dream-pink": "#ffb6c1",
+          "mystic-indigo": "#2b1b54",
+          "ethereal-white": "rgba(255, 255, 255, 0.7)",
+          "primary": "#8a2be2",
+          "secondary": "#ff69b4",
+          "tertiary": "#40e0d0"
+        },
+        fontFamily: {
+          "headline": ["Epilogue"],
+          "body": ["Plus Jakarta Sans"],
+          "label": ["Plus Jakarta Sans"]
+        },
+        borderRadius: {
+          "DEFAULT": "3rem",
+          "lg": "5rem",
+          "xl": "7rem",
+          "full": "9999px"
+        }
+      }
+    }
+  };
+</script>
+<style type="text/tailwindcss">
+  @layer base {
+    body {
+      @apply overflow-x-hidden;
+      background: linear-gradient(120deg, #ffb6c1 0%, #a6c8ff 40%, #d4b3ff 80%, #e0c3fc 100%);
+      background-attachment: fixed;
+    }
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .organic-shape {
+    border-radius: 50% 50% 40% 60% / 60% 40% 50% 50%;
+  }
+  .organic-shape-alt {
+    border-radius: 60% 40% 50% 50% / 40% 60% 50% 50%;
+  }
+  .glass-blur {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.35);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+  }
+  .dream-gradient-text {
+    background: linear-gradient(to right, #8a2be2, #ff69b4, #40e0d0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .floating {
+    animation: floating 8s ease-in-out infinite;
+  }
+  @keyframes floating {
+    0% { transform: translate(0, 0px) rotate(0deg); }
+    50% { transform: translate(0, 30px) rotate(2deg); }
+    100% { transform: translate(0, 0px) rotate(0deg); }
+  }
+  .language-menu {
+    transform: translateY(0.75rem) scale(0.96);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .language-menu[data-open="true"] {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+</head>
+<body class="font-body text-mystic-indigo selection:bg-dream-blue selection:text-white">
+<header class="fixed top-0 w-full z-[100] px-4 py-6">
+  <nav class="glass-blur rounded-full px-6 py-4 flex justify-between items-center max-w-7xl mx-auto shadow-2xl">
+    <a class="flex items-center gap-2" href="code.html">
+      <img alt="Festival STREAM Logo" class="h-10 lg:h-12 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]" src="../res/stream_logo.png"/>
+    </a>
+    <div class="hidden lg:flex gap-12 items-center" id="nav-items"></div>
+    <div class="relative hidden md:block" id="language-picker">
+      <button aria-expanded="false" aria-haspopup="true" class="flex w-[11rem] items-center justify-between gap-3 text-mystic-indigo hover:text-primary font-headline font-bold tracking-tight transition-colors glass-blur px-5 py-3 rounded-full border border-white/40 shadow-lg" id="language-toggle" type="button">
+        <span class="truncate" id="language-current">English</span>
+        <span class="material-symbols-outlined text-lg" id="language-icon">expand_more</span>
+      </button>
+      <div class="language-menu absolute right-0 top-full mt-4 min-w-[12rem] glass-blur rounded-[2rem] border border-white/50 shadow-2xl p-2 transition-all duration-200" data-open="false" id="language-menu"></div>
+    </div>
+  </nav>
+</header>
+
+<main class="relative px-4 lg:px-12 pt-44 pb-24">
+  <div class="absolute top-24 right-0 -z-10 h-[30rem] w-[30rem] rounded-full bg-primary/20 blur-[120px]"></div>
+  <div class="absolute top-[32rem] left-0 -z-10 h-[24rem] w-[24rem] rounded-full bg-tertiary/20 blur-[120px]"></div>
+
+  <section class="max-w-7xl mx-auto mb-20">
+    <div class="glass-blur rounded-[3rem] lg:rounded-[5rem] p-10 lg:p-16 border-white/60 shadow-[0_30px_80px_rgba(43,27,84,0.18)]">
+      <p class="inline-flex items-center gap-3 rounded-full border border-white/60 bg-white/30 px-6 py-3 font-headline text-xs font-black uppercase tracking-[0.35em] text-primary" id="page-eyebrow">
+        Festival STREAM Summer 2026
+      </p>
+      <div class="mt-8 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+        <div>
+          <h1 class="dream-gradient-text font-headline text-5xl font-black leading-none tracking-tight lg:text-7xl" id="page-title">Explore the Activities</h1>
+          <p class="mt-6 max-w-3xl text-lg font-medium leading-relaxed text-mystic-indigo/90 lg:text-2xl" id="page-description">
+            Plan your day around hands-on science, creative making, thoughtful talks, and family-friendly moments across the festival grounds.
+          </p>
+        </div>
+        <div class="organic-shape floating bg-white/30 p-8 text-center shadow-xl border-2 border-white/60" style="animation-delay: 1s;">
+          <p class="text-sm font-black uppercase tracking-[0.3em] text-secondary" id="highlight-eyebrow">Festival Guide</p>
+          <p class="mt-4 text-3xl font-black text-mystic-indigo" id="highlight-text">Discover every corner of STREAM through a gallery of featured activities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto">
+    <div class="mb-12 text-center">
+      <h2 class="dream-gradient-text font-headline text-4xl font-black lg:text-6xl" id="section-title">What's On</h2>
+      <p class="mx-auto mt-4 max-w-3xl text-base font-medium leading-relaxed text-mystic-indigo/80 lg:text-xl" id="section-description">
+        A curated overview of the experiences waiting for you at Festival STREAM.
+      </p>
+    </div>
+    <div class="grid gap-10 md:grid-cols-2 xl:grid-cols-3" id="portfolio-grid"></div>
+  </section>
+</main>
+
+<footer class="bg-gradient-to-b from-mystic-indigo via-[#1a103c] to-black px-4 pb-16 pt-24 text-white rounded-t-[3rem] lg:rounded-t-[6rem] relative overflow-hidden border-t-[12px] border-primary/40">
+  <div class="absolute inset-0 overflow-hidden z-0">
+    <div class="absolute left-1/4 top-12 h-2 w-2 rounded-full bg-white blur-sm"></div>
+    <div class="absolute right-1/3 top-24 h-3 w-3 rounded-full bg-dream-pink blur-md"></div>
+    <div class="absolute bottom-16 left-1/2 h-4 w-4 rounded-full bg-tertiary blur-lg"></div>
+  </div>
+  <div class="relative z-10 mx-auto max-w-7xl text-center">
+    <p class="bg-gradient-to-r from-dream-purple via-secondary to-tertiary bg-clip-text font-headline text-4xl font-black text-transparent lg:text-6xl">Festival STREAM</p>
+    <p class="mx-auto mt-6 max-w-2xl text-lg font-medium text-white/70">A bright overview of workshops, market moments, reading spaces, and interactive discoveries.</p>
+  </div>
+</footer>
+
+<script>
+  const colorMap = {
+    primary: '#8a2be2',
+    secondary: '#ff69b4',
+    tertiary: '#40e0d0'
+  };
+
+  function loadNavigation() {
+    const navContainer = document.getElementById('nav-items');
+    if (!navContainer || !navigationConfig || !Array.isArray(navigationConfig.navigation)) {
+      return;
+    }
+
+    navContainer.innerHTML = '';
+    navigationConfig.navigation.forEach((item) => {
+      const link = document.createElement('a');
+      link.href = item.href;
+      link.className = 'font-headline font-bold transition-colors text-lg tracking-widest';
+      link.textContent = item.label;
+      link.style.color = '#2b1b54';
+
+      link.addEventListener('mouseenter', () => {
+        link.style.color = colorMap[item.color] || '#2b1b54';
+      });
+      link.addEventListener('mouseleave', () => {
+        link.style.color = '#2b1b54';
+      });
+
+      navContainer.appendChild(link);
+    });
+  }
+
+  function initLanguageSelector() {
+    const picker = document.getElementById('language-picker');
+    const toggle = document.getElementById('language-toggle');
+    const menu = document.getElementById('language-menu');
+    const current = document.getElementById('language-current');
+    const icon = document.getElementById('language-icon');
+
+    if (!picker || !toggle || !menu || !current || !icon) {
+      return;
+    }
+
+    const configuredLanguages = Array.isArray(navigationConfig?.languages) && navigationConfig.languages.length > 0
+      ? navigationConfig.languages
+      : [{ code: 'en', label: 'English' }];
+
+    menu.innerHTML = '';
+    configuredLanguages.forEach((language) => {
+      const option = document.createElement('button');
+      option.type = 'button';
+      option.className = 'language-option w-full text-left px-4 py-3 rounded-[1.4rem] font-body font-semibold text-mystic-indigo hover:bg-white/50 transition-colors';
+      option.dataset.lang = language.code;
+      option.dataset.label = language.label;
+      option.textContent = language.label;
+      menu.appendChild(option);
+    });
+
+    const options = Array.from(menu.querySelectorAll('.language-option'));
+    const savedLanguage = localStorage.getItem('selectedLanguage') || document.documentElement.lang || 'en';
+
+    function setMenuState(isOpen) {
+      menu.dataset.open = isOpen ? 'true' : 'false';
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      icon.textContent = isOpen ? 'expand_less' : 'expand_more';
+    }
+
+    function setLanguage(languageCode) {
+      const match = options.find((option) => option.dataset.lang === languageCode) || options[0];
+      current.textContent = match.dataset.label;
+      document.documentElement.lang = match.dataset.lang;
+      localStorage.setItem('selectedLanguage', match.dataset.lang);
+
+      options.forEach((option) => {
+        const isActive = option === match;
+        option.classList.toggle('bg-white/60', isActive);
+        option.classList.toggle('text-primary', isActive);
+      });
+    }
+
+    setLanguage(savedLanguage);
+    setMenuState(false);
+
+    toggle.addEventListener('click', () => {
+      setMenuState(menu.dataset.open !== 'true');
+    });
+
+    options.forEach((option) => {
+      option.addEventListener('click', () => {
+        setLanguage(option.dataset.lang);
+        setMenuState(false);
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!picker.contains(event.target)) {
+        setMenuState(false);
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setMenuState(false);
+      }
+    });
+  }
+
+  function renderPortfolioPage() {
+    if (typeof portfolioConfig === 'undefined') {
+      return;
+    }
+
+    document.title = portfolioConfig.title || document.title;
+
+    const eyebrow = document.getElementById('page-eyebrow');
+    const title = document.getElementById('page-title');
+    const description = document.getElementById('page-description');
+    const highlightEyebrow = document.getElementById('highlight-eyebrow');
+    const highlightText = document.getElementById('highlight-text');
+    const sectionTitle = document.getElementById('section-title');
+    const sectionDescription = document.getElementById('section-description');
+    const grid = document.getElementById('portfolio-grid');
+
+    if (eyebrow && portfolioConfig.eyebrow) {
+      eyebrow.textContent = portfolioConfig.eyebrow;
+    }
+    if (title && portfolioConfig.heroTitle) {
+      title.textContent = portfolioConfig.heroTitle;
+    }
+    if (description && portfolioConfig.heroDescription) {
+      description.textContent = portfolioConfig.heroDescription;
+    }
+    if (highlightEyebrow && portfolioConfig.highlightEyebrow) {
+      highlightEyebrow.textContent = portfolioConfig.highlightEyebrow;
+    }
+    if (highlightText && portfolioConfig.highlightText) {
+      highlightText.textContent = portfolioConfig.highlightText;
+    }
+    if (sectionTitle && portfolioConfig.sectionTitle) {
+      sectionTitle.textContent = portfolioConfig.sectionTitle;
+    }
+    if (sectionDescription && portfolioConfig.sectionDescription) {
+      sectionDescription.textContent = portfolioConfig.sectionDescription;
+    }
+    if (!grid || !Array.isArray(portfolioConfig.items)) {
+      return;
+    }
+
+    grid.innerHTML = '';
+    portfolioConfig.items.forEach((item, index) => {
+      const accentClass = ['text-primary', 'text-secondary', 'text-tertiary'][index % 3];
+      const glowClass = ['bg-primary/20', 'bg-secondary/20', 'bg-tertiary/20'][index % 3];
+      const shapeClass = index % 2 === 0 ? 'organic-shape' : 'organic-shape-alt';
+
+      const card = document.createElement('article');
+      card.className = 'group relative';
+      card.innerHTML = `
+        <div class="absolute -inset-4 ${glowClass} rounded-[4rem] blur-2xl transition-all duration-500 group-hover:scale-105"></div>
+        <div class="relative glass-blur h-full rounded-[3rem] border-2 border-white/60 p-6 shadow-2xl transition-transform duration-500 group-hover:-translate-y-3">
+          <div class="${shapeClass} overflow-hidden border-4 border-white/70 shadow-inner">
+            <img class="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-110" src="${item.image || ''}" alt="${item.imageAlt || item.title || 'Festival activity'}"/>
+          </div>
+          <div class="pt-6">
+            <h3 class="font-headline text-3xl font-black ${accentClass}">${item.title || ''}</h3>
+            <p class="mt-4 text-base font-medium leading-relaxed text-mystic-indigo/85 lg:text-lg">${item.description || ''}</p>
+          </div>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      loadNavigation();
+      initLanguageSelector();
+      renderPortfolioPage();
+    });
+  } else {
+    loadNavigation();
+    initLanguageSelector();
+    renderPortfolioPage();
+  }
+</script>
+</body>
+</html>
