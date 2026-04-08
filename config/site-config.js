@@ -3,7 +3,7 @@ const siteConfig = {
   "title": "Festival STREAM Summer 2026",
   "festivalName": "Festival STREAM",
   "tagline": "Festival STREAM Summer 2026",
-  "heroImage": "res/STREAM Poster 2026.JPG",
+  "heroImage": "../res/STREAM Poster 2026.JPG",
   "heroEyebrow": "📅 5 July 2026  🕒 12:00\n📍 Blaarthemseweg 90, Veldhoven",
   "heroTitle": "Festival\nS.T.R.E.A.M.\nSummer 2026",
   "heroBadge": "Breathe\nIn\nScience",
